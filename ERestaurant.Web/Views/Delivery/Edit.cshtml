@@ -1,0 +1,61 @@
+﻿@model ERestaurant.Domain.DomainModels.Delivery
+@{
+    ViewData["Title"] = "Edit Delivery";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header text-white" style="background: linear-gradient(135deg, #17a2b8, #dc3545);">
+                    <h3><i class="fas fa-edit me-2"></i>Edit Delivery</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" asp-controller="Delivery" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="OrderId" class="form-label fw-bold">Order</label>
+                            <select asp-for="OrderId" class="form-select" asp-items="ViewBag.Orders" required>
+                                <option value="">-- Select Order --</option>
+                            </select>
+                            <span asp-validation-for="OrderId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="DeliveryAddress" class="form-label fw-bold">Delivery Address</label>
+                            <input asp-for="DeliveryAddress" class="form-control" />
+                            <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EstimatedDeliveryTime" class="form-label fw-bold">Estimated Delivery Time</label>
+                            <input asp-for="EstimatedDeliveryTime" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="EstimatedDeliveryTime" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label fw-bold">Status</label>
+                            <input asp-for="Status" class="form-control" />
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-start mt-3">
+                            <button type="submit" class="btn btn-warning me-2" style="border-radius:30px; font-weight:600;">
+                                <i class="fas fa-save me-1"></i>Update
+                            </button>
+                            <a asp-action="Index" asp-controller="Delivery" class="btn btn-secondary" style="border-radius:30px; font-weight:600;">
+                                <i class="fas fa-arrow-left me-1"></i>Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

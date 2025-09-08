@@ -1,0 +1,19 @@
+﻿@using ERestaurant.Domain.DomainModels
+@model Delivery
+@{
+    ViewData["Title"] = "Delivery Details";
+}
+<h2>Delivery Details</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">OrderId</dt>
+    <dd class="col-sm-10">@Model.OrderId</dd>
+    <dt class="col-sm-2">Address</dt>
+    <dd class="col-sm-10">@Model.DeliveryAddress</dd>
+    <dt class="col-sm-2">ETA</dt>
+    <dd class="col-sm-10">@Model.EstimatedDeliveryTime</dd>
+    <dt class="col-sm-2">Status</dt>
+    <dd class="col-sm-10">@Model.Status</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>

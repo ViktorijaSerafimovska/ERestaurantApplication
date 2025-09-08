@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ERestaurant.Domain.DomainModels.Delivery>
+@{
+    ViewData["Title"] = "Deliveries";
+}
+
+<div class="page-header mb-4" style="background: linear-gradient(135deg, #17a2b8, #dc3545); color: white; padding: 2rem 0; border-radius: 0 0 15px 15px;">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1><i class="fas fa-truck me-3"></i>Deliveries</h1>
+        <a class="btn btn-light rounded-pill" asp-action="Create">
+            <i class="fas fa-plus me-2"></i>Create Delivery
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var d in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-map-marker-alt me-2"></i>@d.DeliveryAddress</span>
+                        <span class="fw-bold text-primary">@d.EstimatedDeliveryTime.ToString("dd.MM.yyyy HH:mm")</span>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Customer:</strong> @d.Order?.Customer?.FirstName @d.Order?.Customer?.LasttName</p>
+                        <p>
+                            <strong>Status:</strong>
+                            @if (d.Status == "Delivered")
+                            {
+                                <span class="badge bg-success">@d.Status</span>
+                            }
+                            else if (d.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark">@d.Status</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@d.Status</span>
+                            }
+                        </p>
+
+                        <div class="d-flex justify-content-end mt-3">
+                            <a class="btn btn-sm btn-outline-info me-1" asp-action="Details" asp-route-id="@d.Id"><i class="fas fa-eye"></i></a>
+                            <a class="btn btn-sm btn-outline-warning me-1" asp-action="Edit" asp-route-id="@d.Id"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@d.Id"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="card p-4 shadow">
+    <h2>Delivery Status</h2>
+    <p><strong>Weather:</strong> @ViewBag.WeatherDescription</p>
+    <p><strong>Temperature:</strong> @ViewBag.Temp °C</p>
+    <p>
+        <img src="@($"https://openweathermap.org/img/wn/{ViewBag.WeatherIcon}@2x.png")" alt="weather icon" />
+    </p>
+    <div class="alert alert-info mt-3">
+        @ViewBag.DeliveryMessage
+    </div>
+</div>

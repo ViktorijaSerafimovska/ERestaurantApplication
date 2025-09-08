@@ -1,0 +1,49 @@
+﻿@using ERestaurant.Domain.DomainModels
+@{
+    ViewData["Title"] = "Place Order";
+    var customers = ViewBag.Customers as List<Customer> ?? new List<Customer>();
+    var menuItems = ViewBag.MenuItems as List<MenuItem> ?? new List<MenuItem>();
+}
+
+<div class="page-header mb-4" style="background: linear-gradient(135deg, #dc3545, #ff9f43); color: white; padding: 2rem 0; border-radius: 0 0 15px 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <div class="container">
+        <h2><i class="fas fa-receipt me-3"></i>Place Order</h2>
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="card shadow-sm" style="border-radius:12px;">
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Customer</label>
+                    <select name="customerId" class="form-select">
+                        @foreach (var c in customers)
+                        {
+                            <option value="@c.Id">@c.FirstName @c.LasttName (@c.Email)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Menu Items (hold Ctrl to select multiple)</label>
+                    <select name="menuItemIds" multiple size="8" class="form-select">
+                        @foreach (var m in menuItems)
+                        {
+                            <option value="@m.Id">@m.Name - $@m.Price</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-start mt-3">
+                    <button type="submit" class="btn btn-primary me-2" style="background: linear-gradient(to right, #dc3545, #ff9f43); border:none; border-radius:30px; font-weight:600;">
+                        <i class="fas fa-check me-1"></i>Place Order
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary" style="border-radius:30px; font-weight:600;">
+                        <i class="fas fa-arrow-left me-1"></i>Back
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
