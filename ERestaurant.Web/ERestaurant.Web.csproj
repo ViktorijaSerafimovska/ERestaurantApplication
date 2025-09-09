@@ -37,4 +37,8 @@
     <ProjectReference Include="..\ERestaurant.Service\ERestaurant.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
 </Project>
